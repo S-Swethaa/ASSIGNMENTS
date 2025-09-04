@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 09/01/2025 04:01:10 PM
+// Create Date: 03.09.2025 22:12:00
 // Design Name: 
-// Module Name: fsm_assign_09
+// Module Name: even_odd
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,10 +20,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module fsm_assign_09(
+module even_odd(
 input clk,reset,din,
-output  reg  detected
+output  reg [3:0] detected
     );
+  //  reg ee,oe,eo,oo;
     reg [2:0] state , next_state;
     parameter  a=3'd0,
                b=3'd1,
@@ -40,29 +41,35 @@ output  reg  detected
        detected = 0;
        case (state)
        a:begin
-       if(din)
+       detected=4'b1000;
+       if(din)begin
        next_state=b;
+       end
         else
        next_state=c;
        end
        b:begin
+       detected=4'b0100;
        if(din)
        next_state=a;
         else
        next_state=d;
        end
        c:begin
+       detected=4'b0010;
        if(din)
        next_state=d;
        else
        next_state=a;
        end
        d:begin
+       detected=4'b0001;
        if(din)
        next_state=c;
-      else
+       else begin
        next_state=b;
-       detected =1;
+       //detected =1;
+       end
        end
        endcase
        end
